@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Developer Challenge">
+    <meta name="author" content="tiago.asp.net@gmail.com">
+   
+   <title>Microblog: <%= yield(:page_title) %></title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+ 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+   	<%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <%= render 'shared/nav_header' %>
+
+      <%= yield %>
+
+      
+      </div>
+
+      <footer class="footer">
+        <p>&copy; HE:labs 2015</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </body>
+</html>
+

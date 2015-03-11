@@ -1,0 +1,17 @@
+$color-red: #B94A48;
+$color-black: #000; 
+$color-input-error: #fff0f0;
+$font-bold: bold;
+
+.error-message {
+	margin: 0;
+	color: $color-red;
+}
+.btn-cta{
+	color:$color-black;
+	font-weight:$font-bold;
+}
+.field_with_errors{
+    display: inline;
+	input {background: $color-input-error;}
+}
