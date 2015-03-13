@@ -1,0 +1,83 @@
+<% page_title t('.title') %>
+
+<div class="row">
+  <div class="col-md-7">
+  	     
+     <h3> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> <%= t('.last_tweets')%> </h3>   
+     <br>
+
+      <% if @tweets.present? %>
+
+        <% for t in @tweets %>
+  	 	 
+    	 	  <div class="row">
+    	 	  	<div class="col-md-4">
+            <%= link_to image_tag(t.user.avatar.url(:thumb), class:'img-rounded'), show_profile_path(t.user.login) %>
+              	
+    	 	  	</div>
+    	 	  	<div class="col-md-6">
+    	 	  	 <h4><%= link_to t.user.name, show_profile_path(t.user.login) %></h4>
+    	 	  	 <p><%= t.content %></p>
+    	 	  	</div>
+    	 	 </div>
+
+         <hr>
+
+        <% end %>
+
+        <% else %>
+
+          <div class="row">
+            <%= t('.no_tweets') %>
+          </div>
+
+      <% end %> 
+
+  </div>
+  <div class="col-md-5">
+  	<div class="panel panel-primary">  		
+  		<div class="panel-body">
+        <% if flash[:notice] %>         
+          <div class="alert alert-warning" role="alert"><%= flash[:notice] %></div>          
+        <% end %>
+		  	<%= form_for @user_session, url: enter_path do |f| %>
+  			  <div class="form-group">	
+            <%= f.text_field(:login, class:'form-control', placeholder: t('user_session.login')) %>
+             <%= error_tag @user_session,:login %>		      
+  			  </div>
+  			  <div class="form-group">			    
+  			    <%= f.password_field(:password, class:'form-control', placeholder: t('user_session.password')) %>
+            <%= error_tag @user_session,:password %>
+  			  </div>		  
+          <%= submit_tag('Entrar', class:'btn btn-primary') %> 		  	  
+			<% end %>
+		</div>
+	</div>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+	    	<h3 class="panel-title"> <%= t('.register') %></h3>
+	  	</div>
+		<div class="panel-body">
+		  <%= form_for @user, url: signup_path do |f| %>
+		  	<div class="form-group">	
+          <%= f.text_field :name, class:'form-control', placeholder: t('activerecord.attributes.user.name')%>	
+          <%= error_tag @user,:name %>	   			   
+			  </div>
+			   <div class="form-group">			    
+			    <%= f.text_field :email, class:'form-control', placeholder: t('activerecord.attributes.user.email') %>
+          <%= error_tag @user,:email %>
+			  </div>
+			  <div class="form-group">			   
+			     <%= f.text_field :login, class:'form-control', placeholder: t('activerecord.attributes.user.login') %>
+           <%= error_tag @user,:login %>
+			  </div>
+			  <div class="form-group">			    
+			    <%= f.password_field :password, class:'form-control', placeholder: t('activerecord.attributes.user.password') %>
+          <%= error_tag @user,:password %>
+			  </div>		
+        <%= f.submit('Cadastrar', class:'btn btn-warning btn-cta') %>  		  	 
+			<% end %>
+		</div>
+	</div>
+  </div>
+</div>

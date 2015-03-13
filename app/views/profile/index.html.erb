@@ -27,22 +27,25 @@
           <div class="row">
             Nenhum Tweet disponível. Seja o primeiro(a) a enviar um Tweet :)
           </div>
-          
+
       <% end %> 
 
   </div>
   <div class="col-md-5">
   	<div class="panel panel-primary">  		
   		<div class="panel-body">
-		  	<form>
-			  <div class="form-group">			   
-			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Login">
-			  </div>
-			  <div class="form-group">			    
-			    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
-			  </div>		  
-		  	  <button type="submit" class="btn btn-primary">Entrar</button>
-			</form>
+        <% if flash[:notice] %>         
+          <div class="alert alert-warning" role="alert"><%= flash[:notice] %></div>          
+        <% end %>
+		  	<%= form_tag login_path do %>
+  			  <div class="form-group">	
+            <%= text_field_tag(:login, nil, class:'form-control', placeholder: 'Login') %>		      
+  			  </div>
+  			  <div class="form-group">			    
+  			    <%= password_field_tag(:password, nil, class:'form-control', placeholder: 'Senha') %>
+  			  </div>		  
+          <%= submit_tag('Entrar', class:'btn btn-primary') %> 		  	  
+			<% end %>
 		</div>
 	</div>
 	<div class="panel panel-primary">

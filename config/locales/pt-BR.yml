@@ -3,8 +3,25 @@ pt-BR:
   activerecord:
     attributes:
       user:
-        name: "Nome"      
-        password: "Senha"
+        name: 'Nome'
+        login: 'Login'
+        email: 'Email'     
+        password: 'Senha'
+
+  flash:
+    notice:
+      invalid_login: 'Login Inválido'
+
+  signup:
+    index:
+      title: 'Bem-vindo ao Desafio Microblog'
+      no_tweets: 'Nenhum Tweet disponível. Seja o primeiro(a) a enviar um Tweet :)'
+      last_tweets: 'Últimas Postagens'
+      register: 'Novo aqui? Cadastre-se'
+
+  user_session:      
+    login: 'Login'
+    password: 'Senha'
 
   date:
     abbr_day_names:

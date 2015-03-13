@@ -1,3 +1,3 @@
 class BasicController < ApplicationController
- 
+ 	
 end

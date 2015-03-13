@@ -1,17 +1,22 @@
-class SignupsController < BasicController
+class SignupController < BasicController
+
 	def index
 		new_user		
 	end
+
 	def create
 		new_user
 		if @user.save     
-			render text: 'ok'
+			user_session.register(@user)			
+			redirect_to profile_path
 		else
 			render action: :index
 		end
 	end
+
 	private
-	 def user_params
+
+	def user_params
 		params.require(:user).permit(
 			:name,
 			:email, 
@@ -19,8 +24,10 @@ class SignupsController < BasicController
 			:password		
 		)			
 	 end
+
 	 def new_user   		
 		@user = params[:user] ? User.new(user_params) : User.new
+		@user_session = UserSession.new(session)
 		@tweets = Tweet.last(3)
 	 end			
 end
