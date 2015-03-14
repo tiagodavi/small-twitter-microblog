@@ -11,8 +11,13 @@ Rails.application.routes.draw do
    get  'signup', to: 'signup#index'
    post 'signup', to: 'signup#create'
 
-   get 'profile', to: 'profile#index'
-   get 'profile/:login', to: 'profile#show', as: :show_profile
+   get  'profile', to: 'profile#index'
+   get  'profile/:login', to: 'profile#show', as: :show_profile
+   get  'profile/:login/follow', to: 'profile#follow', as: :follow_profile
+   get  'profile/:login/unfollow', to: 'profile#unfollow', as: :unfollow_profile
+   get  'users',  to: 'profile#users'
+   get  'connect',  to: 'notifications#connect'
+   post 'tweets', to: 'profile#create_tweet', as: :create_tweet
   
 
   # Example of regular route:

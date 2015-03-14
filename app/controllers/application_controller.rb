@@ -3,11 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  http_basic_authenticate_with name: "helabs", password: "helabs"
+
   delegate :current_user, :user_signed_in?, to: :user_session
   helper_method :current_user, :user_signed_in?
 
-  def user_session
-	UserSession.new(session)
+  def user_session(attributes={})
+	 UserSession.new(session, attributes)
   end
 
   def page_not_found

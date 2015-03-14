@@ -1,7 +1,7 @@
 class LoginController < BasicController
 
 	def enter				
-		@user_session = UserSession.new(session, user_session_params)
+		@user_session = user_session(user_session_params)
 		if @user_session.authenticate!			
 			redirect_to profile_path
 		else

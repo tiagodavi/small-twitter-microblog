@@ -11,7 +11,7 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
- 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+ 	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
    	<%= csrf_meta_tags %>
   </head>
@@ -19,13 +19,36 @@
   <body>
 
     <div class="container">
+   
 
       <%= render 'shared/nav_header' %>
 
-      <%= yield %>
+       <div class="row">
 
-      
+          <input type="hidden" id="user-signed-in" value="<%=user_signed_in?%>"> 
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Notificações</h4>
+                  </div>
+                  <div class="modal-body" id="modal-content">
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                 
+                  </div>
+                </div>
+              </div>
+            </div>
       </div>
+
+      <%= yield %>
+      
+    </div>
 
       <footer class="footer">
         <p>&copy; HE:labs 2015</p>
@@ -33,7 +56,9 @@
 
     </div> <!-- /container -->
 
-	<!-- Latest compiled and minified JavaScript -->
+	<!-- Latest compiled and minified JavaScript --> 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js" type="text/javascript"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

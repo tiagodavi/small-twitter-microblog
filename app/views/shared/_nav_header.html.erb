@@ -1,12 +1,37 @@
 
 <div class="header">
-	<!--
-    <nav>
-      <ul class="nav nav-pills pull-right">
-        <li role="presentation" class="active"><a href="#">Home</a></li>       
-        <li role="presentation"><a href="#">Login</a></li>
-      </ul>
-    </nav>
-    -->
-    <h3 class="text-muted"><%= link_to 'Microblog', root_path %></h3>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">	    
+	    	<%= link_to '<i class="glyphicon glyphicon-home"></i> Microblog'.html_safe, root_path, class:'navbar-brand' %>
+	    </div>
+	    <% if user_signed_in? %>
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <form class="navbar-form navbar-left" role="search">
+		        <div class="form-group">
+		          <input type="text" class="typeahead form-control" placeholder="<%= t('navbar.search')%>">
+		        </div>		       
+		      </form>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><%= link_to t('navbar.profile'), profile_path %></li>
+		        <li><%= link_to t('navbar.exit'), exit_path %></li>			        		      
+		        <li>		        
+			        <a href="javascript:;" data-toggle="modal" data-target="#myModal">			        
+				        <span class="label label-warning">
+				        	<span id="total-notify">0</span> Alertas
+				        </span>
+			        </a>			     
+		        </li>
+		        <li>
+			        <p class="navbar-btn">
+			        	<%= yield(:button_following) %>
+			        </p>
+		        </li>    
+		      </ul>
+		    </div><!-- /.navbar-collapse -->		   
+		<% end %>
+	  </div><!-- /.container-fluid -->
+	</nav>
+
 </div>

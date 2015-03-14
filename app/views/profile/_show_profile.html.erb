@@ -1,0 +1,85 @@
+<% page_title t('profile.title', user_name: @user.name) %>
+
+
+<div class="row">
+
+
+  <div class="col-md-4">
+  	 <div class="panel panel-primary"> 
+        <div class="panel-body">
+         <div class="row">
+            <div class="col-md-6">
+              <%= image_tag @user.avatar.url(:thumb), class:'img-rounded' %>           
+            </div>
+            <div class="col-md-6">
+             <span><%= @user.name %></span> <br>
+             <small><%= link_to("@#{@user.login}", show_profile_path(@user.login))%></small>                                   
+            </div>            
+          </div>         
+          <hr>
+          <div class="row">
+            <div class="col-md-4">
+              <span class="small-info"><%= t('profile.tweets') %></span>
+              <small class="text-danger"><%=@user.total(:tweets) %></small>
+            </div>
+            <div class="col-md-4">
+              <span class="small-info"><%= t('profile.following') %></span>
+              <small class="text-danger"><%=@user.total(:following) %></small>
+            </div>
+            <div class="col-md-4">
+              <span class="small-info"><%= t('profile.followers') %></span>
+              <small class="text-danger"><%=@user.total(:followers) %></small>
+            </div>
+          </div>
+         </div>
+      </div>
+  </div>
+
+  <div class="col-md-8">
+  	<div class="panel panel-warning">  
+
+    <% if (user_signed_in?) %>
+
+       <% if current_user.eql?(@user) %>
+
+          <div class="panel-heading">
+              <%= form_tag create_tweet_path, class:'form-horizontal' do %>           
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <p><%=text_area_tag(:tweet, nil, rows: 3, maxlength: 140, class:'maxlength form-control', placeholder: t('profile.happening'))%>              
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="pull-right">
+                      <span id="content-countdown" title="140">140</span>
+                      <%= submit_tag t('profile.btn_publish'), class:'btn btn-primary disabled', id:'btn-publish' %>                        
+                    </div>
+                   </div>
+                </div>
+             <% end %>
+
+          </div>
+
+         <% else %>
+
+             <% current_user.following?(@user) ? button_unfollow(@user) : button_follow(@user) %> 
+
+        <% end %>
+                      
+     <% end %>
+
+  		<div class="panel-body">
+       
+       <div>
+          <% if @tweets.present? %>
+            <%= render partial: 'tweet', collection: @tweets %>  
+            <% else %>
+             <%= t('signup.index.no_tweets') %>
+          <% end %>                            
+       </div>     
+
+        <%= will_paginate(@tweets, renderer: BootstrapPagination::Rails) %>      
+		  </div>
+		</div>
+	</div>
+
+</div>

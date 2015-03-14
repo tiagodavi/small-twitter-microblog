@@ -27,7 +27,7 @@ class SignupController < BasicController
 
 	 def new_user   		
 		@user = params[:user] ? User.new(user_params) : User.new
-		@user_session = UserSession.new(session)
-		@tweets = Tweet.last(3)
+		@user_session = user_session
+		@tweets = Tweet.most_recent.limit(3)
 	 end			
 end
