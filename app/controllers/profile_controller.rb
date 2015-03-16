@@ -12,8 +12,8 @@ class ProfileController < FullController
 		tweets		
 	end
 	
-	def create_tweet
-		Tweet.create({user:current_user,content:params[:tweet]})
+	def create_tweet		
+		current_user.tweet!(params[:tweet])
 		redirect_to action: :index
 	end
 

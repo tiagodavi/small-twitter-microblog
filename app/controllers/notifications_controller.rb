@@ -14,10 +14,8 @@ class NotificationsController < FullController
 			users = new_followers.collect { |f| "@#{f.follower.login}" } 					
 		end	 
 
-		response.stream.write "retry: 60000\n"
-		response.stream.write "event: message\n"
-		response.stream.write "data: #{JSON.dump(users)}\n\n" 
-
+		response.stream.write "retry:60000\nevent:message\ndata:#{JSON.dump(users)}\n\n"
+		
 		ensure
 			response.stream.close 
 	end
